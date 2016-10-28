@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Data Binding in D3 | D3 Workshop</title>
+  <meta name="author" content="David Newbury">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/globals/normalize.css">
+  <link rel="stylesheet" href="/globals/skeleton.css">
+  <link rel="stylesheet" href="/globals/base.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/monokai-sublime.min.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../globals/favicon.png">
+
+</head>
+<body>
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+      <div class="container">
+      <div class="row" style="padding-top: 5%">
+        <h4>#3: Data Binding in D3</h4>
+      </div>
+      <div class="row">
+        <div class="one-half column explanation" >
+          <p>A key concept in D3 is the idea of binding data to nodes, which you can do with the <code>datum()</code> function.</p>
+
+<p>This associates a data object with the node, and that data object is passed as the first parameter to every attribute function that is called on that object.</p>
+
+<p>For example:</p>
+
+<pre><code>var data = [{"x": 200}];
+var circle = g.append("circle").datum(data);
+</code></pre>
+
+<p>binds the <code>data</code> variable to the circle, and</p>
+
+<pre><code>circle.attr("cx", function(d){ return d.x;});
+</code></pre>
+
+<p>passes the datum associated with the circle as the parameter <code>d</code> into that function.</p>
+
+        </div>
+        <div class="one-half column">
+          <div id='visualization'>
+            <svg width="100%" height="100%"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="row button-row">
+        <div class="one-half column" >
+
+            <a class="button extra-space" href="/">Back to Index</a>
+            <a href="/examples/functions_as_attributes/" class="button">Prev</a>
+            <a href="/examples/update_loop/" class="button">Next</a>
+        </div>
+        <div class="one-half column" id="example-buttons" >
+
+          <form id="codepen" action="http://codepen.io/pen/define" method="POST" target="_blank" >
+              <input id="codepen_submit" type="hidden" name="data" value='{}'>
+              <input type="submit" value="View on CodePen">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="secondary">
+      <div class="container">
+        <div class="row">
+          <div class="seven columns" style="margin-top: 5%">
+            <h5>This Example's Code</h5>
+            <pre><code id="code-display" class="js"></code></pre>
+            <p class="tiny"><i>This code block is preceded by <a href="/globals/init.js">initialization code</a> that defines <code>parent</code>, <code>svg</code>, <code>margin</code>, <code>width</code>, &amp; <code>height</code>.</i></p>
+          </div>
+          <div class="five columns" style="margin-top: 5%">
+            <h5>This Example's Data</h5>
+            <pre><code id="data-display" class="js"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <footer class="secondary footer">
+    <div class="container">
+      <div class="row">
+        <div class="three columns" style="margin-top: 3%">
+          
+        </div>
+        <div class="six columns" style="margin-top: 3%">
+          <p>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This written work created as part of this project is licensed under a<br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>All code is licensed under a <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
+          </p>
+          <p>
+            Thanks to all the wonderful examples, demos and libraries that I've cribbed from while generating this.  You made my learning D3 possible and I hope to pass on that favor to others.<br> 
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script src="data.js"></script>
+  <script src="/globals/init.js"></script>
+  <script src="code.js"></script>
+  <script src="/globals/data-display.js"></script>
+  
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

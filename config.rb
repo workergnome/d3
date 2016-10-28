@@ -14,6 +14,8 @@ page "/examples/**/*.html", layout: :code
 
 # General configuration
 
+set :build_dir, 'docs'
+
 ###
 # Helpers
 ###

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Basic Events | D3 Workshop</title>
+  <meta name="author" content="David Newbury">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/globals/normalize.css">
+  <link rel="stylesheet" href="/globals/skeleton.css">
+  <link rel="stylesheet" href="/globals/base.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/monokai-sublime.min.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../globals/favicon.png">
+
+</head>
+<body>
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+      <div class="container">
+      <div class="row" style="padding-top: 5%">
+        <h4>#6: Basic Events</h4>
+      </div>
+      <div class="row">
+        <div class="one-half column explanation" >
+          <p>Like most Javascript libraries, D3 provides an abstraction over the native <a href="https://developer.mozilla.org/en-US/docs/Web/Events">DOM events</a>.</p>
+
+<p>In this example, we create a slider using a HTML <a href="http://www.html5tutorial.info/html5-range.php">range input</a>. We set its attributes using <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_attr"><code>attr()</code></a>.  We also use <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_style"><code>style()</code></a> to set its <code>width</code> via CSS.</p>
+
+<p>Our intention is that moving the slider should update the position of the circle. To do this, we add an event handler to the slider with the D3 <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_on"><code>on()</code></a> function, which takes as its arguments an event name and a function<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, which will be executed every time the event fires.</p>
+
+<p>In out event handler function <code>onInput()</code>, we access the <code>value</code> property of the range slider, which has been bound to <code>this</code>, and pass it as the new data to our <code>update()</code> function.</p>
+
+<p>Notice that we also call <code>update()</code> direcctly with an initial value to give the circle an position.</p>
+
+<p>If you're interested in learning more about Javascript and events,  <a href="http://eloquentjavascript.net/14_event.html">Eloquent Javascript</a> has a chapter that covers them in detail. You can also take a deep dive into how Javascript is designed around an <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop">event loop</a>.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The <a href="https://github.com/d3/d3-selection/blob/master/README.md#selection_on">D3 docs</a> define  the function's signature for <code>on()</code>'s event handler as <code>function(d,i,nodes){};</code>: where the parameters are the current datum <code>d</code>, the current index <code>i</code>, and the current group <code>nodes</code>.  It also sets <code>this</code> to the current DOM element. Javascript, unlike some other languages, ignores arguments that don't match the function signature, so if we've defined <code>function handleInput(){}</code>, but we call it with <code>handleInput(d,i,nodes)</code>, it still works.  Convenient, though inelegant. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </div>
+        <div class="one-half column">
+          <div id='visualization'>
+            <svg width="100%" height="100%"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="row button-row">
+        <div class="one-half column" >
+
+            <a class="button extra-space" href="/">Back to Index</a>
+            <a href="/examples/basic_transitions/" class="button">Prev</a>
+            <a href="/examples/intro_to_scales/" class="button">Next</a>
+        </div>
+        <div class="one-half column" id="example-buttons" >
+
+          <form id="codepen" action="http://codepen.io/pen/define" method="POST" target="_blank" >
+              <input id="codepen_submit" type="hidden" name="data" value='{}'>
+              <input type="submit" value="View on CodePen">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="secondary">
+      <div class="container">
+        <div class="row">
+          <div class="seven columns" style="margin-top: 5%">
+            <h5>This Example's Code</h5>
+            <pre><code id="code-display" class="js"></code></pre>
+            <p class="tiny"><i>This code block is preceded by <a href="/globals/init.js">initialization code</a> that defines <code>parent</code>, <code>svg</code>, <code>margin</code>, <code>width</code>, &amp; <code>height</code>.</i></p>
+          </div>
+          <div class="five columns" style="margin-top: 5%">
+            <h5>This Example's Data</h5>
+            <pre><code id="data-display" class="js"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <footer class="secondary footer">
+    <div class="container">
+      <div class="row">
+        <div class="three columns" style="margin-top: 3%">
+          
+        </div>
+        <div class="six columns" style="margin-top: 3%">
+          <p>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This written work created as part of this project is licensed under a<br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>All code is licensed under a <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
+          </p>
+          <p>
+            Thanks to all the wonderful examples, demos and libraries that I've cribbed from while generating this.  You made my learning D3 possible and I hope to pass on that favor to others.<br> 
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script src="data.js"></script>
+  <script src="/globals/init.js"></script>
+  <script src="code.js"></script>
+  <script src="/globals/data-display.js"></script>
+  
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

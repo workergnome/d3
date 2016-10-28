@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Introduction to Scales | D3 Workshop</title>
+  <meta name="author" content="David Newbury">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="/globals/normalize.css">
+  <link rel="stylesheet" href="/globals/skeleton.css">
+  <link rel="stylesheet" href="/globals/base.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/monokai-sublime.min.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../globals/favicon.png">
+
+</head>
+<body>
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  
+      <div class="container">
+      <div class="row" style="padding-top: 5%">
+        <h4>#7: Introduction to Scales</h4>
+      </div>
+      <div class="row">
+        <div class="one-half column explanation" >
+          <p>One of D3's most important and useful concepts is the <a href="https://github.com/d3/d3-scale">scale</a>, which is a function that maps an input <strong>domain</strong> to an output <strong>range</strong>.<sup id="fnref:3"><a href="#fn:3" class="footnote">1</a></sup></p>
+
+<p>We've changed our slider so instead of sliding between values of 0 and <code>width</code> it now slides between 0 and 100. We'd still like our circle to move all the way across, so we need a way to define that a value of 50 is equal to a x position that's 50% across.</p>
+
+<p>In graphics libraries like <a href="http://p5js.org">p5.js</a>, there usually a <code>map()</code> function for this. D3 goes beyond that to provide a sophisticated system for <em>generating</em> map functions. Calling <code>var x = d3.scaleLinear()</code><sup id="fnref:4"><a href="#fn:4" class="footnote">2</a></sup>, doesn't return a value, it returns a function that you can call as <code>x()</code>.<sup id="fnref:1"><a href="#fn:1" class="footnote">3</a></sup></p>
+
+<p>Calling the <a href="https://github.com/d3/d3-scale/blob/master/README.md#continuous_domain"><code>domain()</code></a> and <a href="https://github.com/d3/d3-scale/blob/master/README.md#continuous_range"><code>range()</code></a> functions on <code>x</code> will set the <strong>input domain</strong> and <strong>output range</strong> for <code>x</code>.<sup id="fnref:2"><a href="#fn:2" class="footnote">4</a></sup>  This is useful since <code>attr()</code> <em>takes</em> functions as a parameter, so we can write <code>.attr("cx", x)</code>. This is equivalent to <code>.attr("cx", function(d){return x(d);})</code> but much more concise.</p>
+
+<p>For <code>x</code>, we are using a linear scale, which maps values linearly from the domain to the range. 0 is mapped to 0, 50 is mapped to 50% of <code>width</code>, and 100 is mapped to <code>width</code>.</p>
+
+<p>For <code>y</code>, we're using <a href="https://github.com/d3/d3-scale/blob/master/README.md#scalePow"><code>d3.scalePow()</code></a>, a power scale.  If we set the <a href="https://github.com/d3/d3-scale/blob/master/README.md#pow_exponent"><code>exponent()</code></a> to 2, interpolates between 0 and 1 with exponential growth.</p>
+
+<p>We've added a <code>c</code> scale for color, which is a <a href="https://github.com/d3/d3-scale/blob/master/README.md#scaleSequential"><code>d3.scaleSequential</code></a>.  These scales map from a domain to a specific range defined by a provided interpolator function.  We're using the <a href="https://github.com/d3/d3-scale/blob/master/README.md#interpolateInferno"><code>d3.interpolateInferno</code></a> interpolator, which returns specific CSS colors as the range.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:3">
+      <p>For more information on the rationales behind D3 scales, see Mike Bostock's <a href="https://medium.com/@mbostock/introducing-d3-scale-61980c51545f">article introducing D3 Scale</a>. <a href="#fnref:3" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>In D3 v.4, Many of the method names have been changed as part of an effort to break the D3 library into reusable parts.  Many of the examples that you see online will use <code>d3.scale.linear</code> instead of <code>d3.scaleLinear</code>.  For information on this and other changes in D3 v.4, see this amazing postmortem by Mike Bostock: <a href="https://medium.com/@mbostock/what-makes-software-good-943557f8a488">What Makes Software Good</a>. <a href="#fnref:4" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:1">
+      <p>In Javascript, all functions are <em>first class</em> objects, so they can be stored in variables, manipulated, have properties assigned to them, and everything else that you can do with a standard object.  D3 uses this capability constantly—it's one of the things that makes D3 so powerful, but also so confusing to people coming from languages like C.  For a useful overview of functions as first class objects, see <a href="http://timmknight.github.io/2015/first-class-functions-javascript/">this article</a>. <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Yes, this is calling a function property assigned to a function object that sets properties on itself.  Javascript is a powerful, strange language, and D3 takes full advantage of it. <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        </div>
+        <div class="one-half column">
+          <div id='visualization'>
+            <svg width="100%" height="100%"></svg>
+          </div>
+        </div>
+      </div>
+      <div class="row button-row">
+        <div class="one-half column" >
+
+            <a class="button extra-space" href="/">Back to Index</a>
+            <a href="/examples/basic_events/" class="button">Prev</a>
+            <a href="/examples/intro_to_selectors/" class="button">Next</a>
+        </div>
+        <div class="one-half column" id="example-buttons" >
+
+          <form id="codepen" action="http://codepen.io/pen/define" method="POST" target="_blank" >
+              <input id="codepen_submit" type="hidden" name="data" value='{}'>
+              <input type="submit" value="View on CodePen">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="secondary">
+      <div class="container">
+        <div class="row">
+          <div class="seven columns" style="margin-top: 5%">
+            <h5>This Example's Code</h5>
+            <pre><code id="code-display" class="js"></code></pre>
+            <p class="tiny"><i>This code block is preceded by <a href="/globals/init.js">initialization code</a> that defines <code>parent</code>, <code>svg</code>, <code>margin</code>, <code>width</code>, &amp; <code>height</code>.</i></p>
+          </div>
+          <div class="five columns" style="margin-top: 5%">
+            <h5>This Example's Data</h5>
+            <pre><code id="data-display" class="js"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  <footer class="secondary footer">
+    <div class="container">
+      <div class="row">
+        <div class="three columns" style="margin-top: 3%">
+          
+        </div>
+        <div class="six columns" style="margin-top: 3%">
+          <p>
+            <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This written work created as part of this project is licensed under a<br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>All code is licensed under a <a rel="license" href="https://opensource.org/licenses/MIT">MIT License</a>.
+          </p>
+          <p>
+            Thanks to all the wonderful examples, demos and libraries that I've cribbed from while generating this.  You made my learning D3 possible and I hope to pass on that favor to others.<br> 
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script src="data.js"></script>
+  <script src="/globals/init.js"></script>
+  <script src="code.js"></script>
+  <script src="/globals/data-display.js"></script>
+  
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
