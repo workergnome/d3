@@ -30,6 +30,21 @@ xmlhttp.onreadystatechange = function() {
         }
         var codepen_json = JSON.stringify(codepen);
         document.getElementById("codepen_submit").setAttribute("value", codepen_json);
+
+
+        var starterKit = "<!DOCTYPE html>\n<html lang='en'>\n  <head>\n    <style type='text/css'>\n      body {background-color: #ccc;} \n      #visualization {\n        margin: 50px; \n        width: 500px; \n        height: 400px; \n        border-radius: 4px; \n        border: 1px solid #eee; \n        background-color: #fff; \n      }\n    </style>\n  </head>\n  <body>\n\n    <div id='visualization'>\n      <svg width='100%' height='100%'></svg>\n    </div>\n\n    <script src='https://d3js.org/d3.v4.js'></script>\n    <script type='text/javascript'>\nREPLACE_ME\n    </script>\n  </body>\n</html>";
+        starterKit = starterKit.replace("REPLACE_ME",fake_js.replace(/^(.*)$/gm, "        $1" ));
+
+        window.URL = window.URL || window.webkitURL ;
+
+        var bb = new Blob([starterKit], {type: 'text/html'});
+        var a = document.createElement('a');
+        a.download = "d3_example_"+window.location.pathname.split("/")[2]+".html";
+        a.href = window.URL.createObjectURL(bb);
+        a.textContent = 'Download as HTML';
+        a.classList.add('button');
+        document.getElementById("example-buttons").appendChild(a);
+
     }
 }
 xmlhttp.open("GET", "code.js", true);
