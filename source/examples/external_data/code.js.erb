@@ -1,4 +1,4 @@
-d3.tsv('<%= tsv %>', function(loaded_data) {
+d3.tsv('<%= generate_data(:tsv) %>', function(loaded_data) {
 
   data = loaded_data.map(function(d){return +d.value})
 

@@ -26,9 +26,10 @@ helpers do
     sitemap.resources.find_all{|r| r.path.include?("examples/") && r.path.include?("html")}.sort_by{|r| r.metadata[:page][:order] || 0}
   end
 
-  def tsv
-    "#{hostname}#{current_page.url.split("/")[0..-2].join("/")}/data.tsv"
+  def generate_data(type, filename="data")
+    "#{hostname}#{current_page.url.split("/")[0..-2].join("/")}/#{filename}.#{type.to_s}"
   end
+ 
   def hostname
     development? ? "http://localhost:4567"  : "http://d3.workergnome.com"
   end

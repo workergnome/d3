@@ -4,7 +4,7 @@ var original_data = null;
 var intervalKeeper;
 if (data) {
   original_data = data;
-  dataElement.innerHTML =  JSON.stringify(data, null, '  ');
+  dataElement.innerHTML =  "var data = " + JSON.stringify(data, null, '  ');
   hljs.highlightBlock(dataElement);
 } else {
   intervalKeeper = window.setInterval(function(){
