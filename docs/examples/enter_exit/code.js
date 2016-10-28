@@ -19,9 +19,10 @@ function update(data) {
 
   circle.enter()
     .append("circle")
+    .merge(circle)
       .attr("cx", function(d, i, nodes) {return x( (i+0.5)/10 )})
       .attr("cy", y(0.5))
-      .attr("r", function(d) { return Math.sqrt(d) });
+      .attr("r", function(d) { return Math.sqrt(d) })
 
   circle.exit().remove();
 }
