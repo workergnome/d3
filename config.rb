@@ -24,6 +24,13 @@ helpers do
     sitemap.resources.find_all{|r| r.path.include?("examples/") && r.path.include?("html")}.sort_by{|r| r.metadata[:page][:order] || 0}
   end
 
+  def tsv
+    "#{hostname}#{current_page.url.split("/")[0..-2].join("/")}/data.tsv"
+  end
+  def hostname
+    development? ? "http://localhost:4567"  : "http://d3.workergnome.com"
+  end
+  
   def init_code
     File.read("./source/globals/init.js").gsub("\n",'\n').gsub('"', '\"');
   end

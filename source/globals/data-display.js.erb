@@ -1,10 +1,19 @@
 // Format Data
 var dataElement = document.getElementById("data-display");
+var original_data = null;
+var intervalKeeper;
 if (data) {
+  original_data = data;
   dataElement.innerHTML = "var data = " + JSON.stringify(data, null, '  ');
   hljs.highlightBlock(dataElement);
 } else {
-  dataElement.parentNode.removeChild(dataElement);  
+  intervalKeeper = window.setInterval(function(){
+    if (data) {
+      dataElement.innerHTML = "var data = " + JSON.stringify(data, null, '  ');
+      hljs.highlightBlock(dataElement);
+      window.clearInterval(intervalKeeper);
+    }
+  },100)
 }
 
 // Format Code
@@ -16,7 +25,7 @@ xmlhttp.onreadystatechange = function() {
         hljs.highlightBlock(code);
 
         var fake_js = "<%= init_code %>\n";
-        fake_js += "data = " + JSON.stringify(data, null, '  ') + ";\n\n";
+        fake_js += "var data = " + JSON.stringify(original_data, null, '  ') + ";\n\n";
         fake_js += xmlhttp.responseText;
 
         var codepen = {
