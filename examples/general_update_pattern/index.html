@@ -38,7 +38,17 @@
       </div>
       <div class="row">
         <div class="one-half column explanation" >
-          <p>…write me…</p>
+          <p>This example shows the very basics of the D3 data binding system, which creates selections via data joins.</p>
+
+<p>A set of <code>circle</code> elements are initialized with <code>data</code>, which creates the three selections:</p>
+
+<ul>
+  <li>The <code>enter</code> selection: elements that did not previously exist.</li>
+  <li>The <code>update</code> selection: elements that currently exist.</li>
+  <li>The <code>exit</code> selection: elements that exist, but have no longer have data.</li>
+</ul>
+
+<p>In this code, for each element in the <code>enter</code> group, we append a new <code>circle</code> element. We then calculate its properties from the data that has been joined with it.</p>
 
         </div>
         <div class="one-half column">
@@ -52,7 +62,7 @@
 
             <a class="button extra-space" href="/">Back to Index</a>
             <a href="/examples/data_joins/" class="button">Prev</a>
-            <a href="/examples/letter_frequency/" class="button">Next</a>
+            <a href="/examples/bar_chart/" class="button">Next</a>
         </div>
         <div class="one-half column" id="example-buttons" >
 

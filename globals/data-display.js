@@ -1,10 +1,19 @@
 // Format Data
 var dataElement = document.getElementById("data-display");
+var original_data = null;
+var intervalKeeper;
 if (data) {
+  original_data = data;
   dataElement.innerHTML = "var data = " + JSON.stringify(data, null, '  ');
   hljs.highlightBlock(dataElement);
 } else {
-  dataElement.parentNode.removeChild(dataElement);  
+  intervalKeeper = window.setInterval(function(){
+    if (data) {
+      dataElement.innerHTML = "var data = " + JSON.stringify(data, null, '  ');
+      hljs.highlightBlock(dataElement);
+      window.clearInterval(intervalKeeper);
+    }
+  },100)
 }
 
 // Format Code
@@ -16,7 +25,7 @@ xmlhttp.onreadystatechange = function() {
         hljs.highlightBlock(code);
 
         var fake_js = "/************************************\n*    HIDDEN INITIALIZATION BLOCK    *\n************************************/\n\n// Select the DOM element\nvar parent = d3.select(\"#visualization\");\n\n// Set up the margins\nvar bbox   = parent.node().getBoundingClientRect();\nvar margin = {top: 50, right: 50, bottom: 50, left: 50};\nvar width  = +bbox.width - margin.left - margin.right;\nvar height = +bbox.height - margin.top - margin.bottom;\n\n// Define svg as a group within the base SVG.\nvar svg = parent.select(\"svg\").append(\"g\")\n    .attr(\"transform\", \"translate(\" + margin.left + \",\" + margin.top + \")\");\n\n/************************************\n*  END HIDDEN INITIALIZATION BLOCK  *\n************************************/\n\n";
-        fake_js += "data = " + JSON.stringify(data, null, '  ') + ";\n\n";
+        fake_js += "var data = " + JSON.stringify(original_data, null, '  ') + ";\n\n";
         fake_js += xmlhttp.responseText;
 
         var codepen = {
