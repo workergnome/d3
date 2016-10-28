@@ -62,6 +62,13 @@ input[type="button"] {
    color: #999;
 }
 
+.button.small-button {
+  height: 25px;
+  padding: 0 18px;
+  line-height: 25px;
+  margin-bottom: 0;
+}
+
 #codepen {
   display: inline-block; 
   margin-left: 5rem;

@@ -1,4 +1,4 @@
-d3.tsv('http://d3.workergnome.com/examples/bar_chart_tsv/data.tsv', function(loaded_data) {
+d3.tsv('http://d3.workergnome.com/examples/external_data/data.tsv', function(loaded_data) {
 
   data = loaded_data.map(function(d){return +d.value})
 
