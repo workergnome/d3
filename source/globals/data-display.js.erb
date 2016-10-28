@@ -4,12 +4,12 @@ var original_data = null;
 var intervalKeeper;
 if (data) {
   original_data = data;
-  dataElement.innerHTML = "var data = " + JSON.stringify(data, null, '  ');
+  dataElement.innerHTML =  JSON.stringify(data, null, '  ');
   hljs.highlightBlock(dataElement);
 } else {
   intervalKeeper = window.setInterval(function(){
     if (data) {
-      dataElement.innerHTML = "var data = " + JSON.stringify(data, null, '  ');
+      dataElement.innerHTML = JSON.stringify(data, null, '  ');
       hljs.highlightBlock(dataElement);
       window.clearInterval(intervalKeeper);
     }

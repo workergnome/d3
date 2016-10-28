@@ -13,3 +13,5 @@ A set of `circle` elements are initialized with `data`, which creates the three 
 
 
 In this code, for each element in the `enter` group, we append a new `circle` element. We then calculate its properties from the data that has been joined with it.
+
+For a full explanation and demo, see the  [General Update Pattern](http://bl.ocks.org/mbostock/3808218) article.
